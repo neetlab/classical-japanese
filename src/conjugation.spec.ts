@@ -1,4 +1,4 @@
-import { conjugate } from "./conjugation";
+import { Conjugator } from "./conjugation";
 
 const NA = expect.anything();
 
@@ -312,6 +312,13 @@ test.each([
     },
   ],
 ])("test %s", (conclusive, expected) => {
-  const result = conjugate(conclusive);
-  expect(result).toEqual(expected);
+  const conjugator = new Conjugator({ log: () => void {} });
+  expect({
+    mizen: conjugator.conjugate(conclusive, "mizen"),
+    renyo: conjugator.conjugate(conclusive, "renyo"),
+    shusi: conjugator.conjugate(conclusive, "shusi"),
+    rentai: conjugator.conjugate(conclusive, "rentai"),
+    izen: conjugator.conjugate(conclusive, "izen"),
+    mere: conjugator.conjugate(conclusive, "mere"),
+  }).toEqual(expected);
 });
